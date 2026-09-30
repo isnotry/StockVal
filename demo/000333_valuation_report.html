@@ -1,0 +1,439 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>美的集团(000333) 全维估值体检报告</title>
+<style>
+  *{margin:0;padding:0;box-sizing:border-box}
+  body{background:#0a0e1a;color:#e2e8f0;font-family:'SF Mono','Monaco','Cascadia Code','Consolas',monospace;font-size:14px;line-height:1.5}
+  .container{max-width:1200px;margin:0 auto;padding:20px}
+  .header{background:linear-gradient(135deg,#0f172a 0%,#1e1b4b 100%);border:1px solid #1e293b;border-radius:10px;padding:24px;margin-bottom:16px;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:12px}
+  .header-left h1{font-size:24px;color:#f1f5f9;font-weight:700}
+  .header-left .code{color:#6366f1;font-size:14px;margin-top:4px}
+  .header-right{text-align:right}
+  .price-main{font-size:36px;font-weight:700;font-family:monospace}
+  .price-change{font-size:16px;margin-top:4px}
+  .card{background:#0f172a;border:1px solid #1e293b;border-radius:8px;padding:16px;margin-bottom:16px}
+  .card-title{font-size:13px;color:#94a3b8;text-transform:uppercase;letter-spacing:1px;margin-bottom:12px;padding-bottom:8px;border-bottom:1px solid #1e293b;display:flex;justify-content:space-between;align-items:center}
+  .card-title .badge{font-size:10px;padding:2px 8px;border-radius:3px;background:#1e1b4b;color:#818cf8}
+  .grid-2{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+  .metric{display:flex;justify-content:space-between;align-items:center;padding:6px 0;border-bottom:1px solid #1e293b}
+  .metric:last-child{border-bottom:none}
+  .metric-label{color:#94a3b8;font-size:13px}
+  .metric-value{color:#e2e8f0;font-family:monospace;font-weight:600}
+  table{width:100%;border-collapse:collapse}
+  th{color:#64748b;font-size:11px;text-transform:uppercase;letter-spacing:0.5px;padding:8px 6px;border-bottom:1px solid #1e293b;text-align:left}
+  td{padding:7px 6px;border-bottom:1px solid #0f172a}
+  .judgment-box{background:linear-gradient(135deg,#0f172a 0%,#1a1a2e 100%);border:1px solid #1e293b;border-radius:8px;padding:20px;margin-bottom:16px}
+  .judge-item{display:flex;gap:16px;padding:16px 0;border-bottom:1px solid #1e293b}
+  .judge-item:last-child{border-bottom:none}
+  .judge-label{font-size:16px;font-weight:700;min-width:140px;display:flex;align-items:center;gap:8px}
+  .judge-dot{width:10px;height:10px;border-radius:50%;display:inline-block}
+  .judge-content{flex:1}
+  .judge-verdict{font-size:18px;font-weight:700;margin-bottom:4px}
+  .judge-detail{color:#94a3b8;font-size:13px;line-height:1.6}
+  .disclaimer{background:#0f172a;border:1px solid #1e293b;border-radius:6px;padding:12px;margin-top:16px;color:#64748b;font-size:11px;text-align:center}
+  .footer{text-align:center;color:#475569;font-size:11px;padding:16px 0;border-top:1px solid #1e293b;margin-top:16px}
+  .up{color:#ef4444} .down{color:#22c55e} .neutral{color:#fbbf24} .highlight{color:#fbbf24;font-weight:600}
+  @media(max-width:760px){.grid-2{grid-template-columns:1fr}}
+  .share-btn{margin-top:12px;background:#1e1b4b;color:#818cf8;border:1px solid #6366f150;padding:8px 16px;border-radius:6px;font-size:13px;cursor:pointer;font-family:inherit;transition:.15s}
+  .share-btn:hover{background:#312e81;color:#a5b4fc}
+  .share-overlay{position:fixed;inset:0;background:rgba(5,8,16,.88);display:none;align-items:center;justify-content:center;z-index:999;padding:16px}
+  .share-overlay.show{display:flex}
+  .share-modal{background:#0f172a;border:1px solid #1e293b;border-radius:12px;padding:20px;max-width:560px;width:100%;text-align:center}
+  .share-modal h3{font-size:15px;color:#e2e8f0;margin-bottom:4px}
+  .share-modal .tip{color:#64748b;font-size:11px;margin-bottom:12px}
+  .share-modal canvas{width:100%;max-width:330px;height:auto;border-radius:8px;border:1px solid #1e293b;display:block;margin:0 auto}
+  .share-actions{margin-top:14px;display:flex;gap:10px;justify-content:center}
+  .share-actions button{flex:1;padding:10px;border-radius:6px;font-size:13px;cursor:pointer;font-family:inherit;border:none;transition:.15s}
+  .btn-save{background:#6366f1;color:#fff}
+  .btn-save:hover{background:#818cf8}
+  .btn-copy{background:#1e293b;color:#cbd5e1;border:1px solid #334155!important}
+  .btn-close{background:transparent;color:#64748b;border:1px solid #334155!important}
+</style>
+</head>
+<body>
+<div class="container">
+  <div class="header">
+    <div class="header-left">
+      <h1>美的集团 <span style="font-size:16px;color:#64748b;font-weight:400">全维估值体检</span></h1>
+      <div class="code">SZ000333 · 家电 · 数据日期 2026-09-30</div>
+    </div>
+    <div class="header-right">
+      <div class="price-main" style="color:#22c55e">¥80.10</div>
+      <div class="price-change" style="color:#22c55e">-1.56 (-1.91%)</div>
+      <button class="share-btn" onclick="openShare()">📤 分享手机卡片</button>
+    </div>
+  </div>
+
+  <div class="grid-2">
+    <div class="card">
+      <div class="card-title">实时行情 <span class="badge">腾讯财经</span></div>
+      
+      <div class="metric"><span class="metric-label">现价</span><span class="metric-value" style="font-size:18px;color:#22c55e">¥80.10</span></div>
+      <div class="metric"><span class="metric-label">今开 / 昨收</span><span class="metric-value">¥81.66 / ¥81.66</span></div>
+      <div class="metric"><span class="metric-label">最高 / 最低</span><span class="metric-value">¥81.80 / ¥79.31</span></div>
+      <div class="metric"><span class="metric-label">52周最高 / 最低</span><span class="metric-value highlight">¥89.50 / ¥66.81</span></div>
+      <div class="metric"><span class="metric-label">PE(TTM) / PE(静)</span><span class="metric-value highlight">13.77x / 11.55x</span></div>
+      <div class="metric"><span class="metric-label">PB(市净率)</span><span class="metric-value highlight">2.89x</span></div>
+      <div class="metric"><span class="metric-label">总市值 / 流通市值</span><span class="metric-value">¥5516亿 / ¥6112亿</span></div>
+      <div class="metric"><span class="metric-label">换手率 / 振幅</span><span class="metric-value">0.58% / 3.05%</span></div>
+      <div class="metric"><span class="metric-label">量比 / 成交额</span><span class="metric-value">1.71 / ¥32.32亿</span></div>
+    </div>
+    <div class="card">
+      <div class="card-title">估值指标 <span class="badge">同花顺一致预期</span></div>
+      
+      <div class="metric"><span class="metric-label">PE(TTM)</span><span class="metric-value highlight">13.77x</span></div>
+      <div class="metric"><span class="metric-label">前向PE</span><span class="metric-value highlight">12.94x</span></div>
+      <div class="metric"><span class="metric-label">PB</span><span class="metric-value">2.89x</span></div>
+      <div class="metric"><span class="metric-label">EPS增速CAGR</span><span class="metric-value up">6.90%</span></div>
+      <div class="metric"><span class="metric-label">PEG</span><span class="metric-value ">1.86</span></div>
+      <div class="metric"><span class="metric-label">PE消化至30x需</span><span class="metric-value" style="color:#22c55e">已低于30x</span></div>
+      <div class="metric"><span class="metric-label">覆盖机构数</span><span class="metric-value">31家</span></div>
+      <div class="metric"><span class="metric-label">TTM股息率</span><span class="metric-value highlight">5.37%</span></div>
+      <div style="margin-top:12px;padding:8px;background:#1a1a2e;border-radius:4px;font-size:12px;color:#94a3b8"><span style="color:#fbbf24">📌 判读：</span>前向PE仅12.94x远低于30x锚点，EPS预期增长，PEG=1.86</div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-title">价格走势 (前复权日K线) <span class="badge">腾讯财经 · 81个交易日</span></div>
+    <svg viewBox="0 0 900 280" style="width:100%;height:auto" xmlns="http://www.w3.org/2000/svg">
+  <defs><linearGradient id="priceGrad" x1="0" y1="0" x2="0" y2="1">
+    <stop offset="0%" stop-color="#ef4444" stop-opacity="0.15"/><stop offset="100%" stop-color="#ef4444" stop-opacity="0"/></linearGradient></defs>
+  <line x1="50" y1="20.0" x2="880" y2="20.0" stroke="#1a1a2e" stroke-width="0.5"/><text x="45" y="24.0" fill="#666" font-size="10" text-anchor="end" font-family="monospace">91.29</text><line x1="50" y1="76.2" x2="880" y2="76.2" stroke="#1a1a2e" stroke-width="0.5"/><text x="45" y="80.2" fill="#666" font-size="10" text-anchor="end" font-family="monospace">86.18</text><line x1="50" y1="132.5" x2="880" y2="132.5" stroke="#1a1a2e" stroke-width="0.5"/><text x="45" y="136.5" fill="#666" font-size="10" text-anchor="end" font-family="monospace">81.06</text><line x1="50" y1="188.8" x2="880" y2="188.8" stroke="#1a1a2e" stroke-width="0.5"/><text x="45" y="192.8" fill="#666" font-size="10" text-anchor="end" font-family="monospace">75.95</text><line x1="50" y1="245.0" x2="880" y2="245.0" stroke="#1a1a2e" stroke-width="0.5"/><text x="45" y="249.0" fill="#666" font-size="10" text-anchor="end" font-family="monospace">70.83</text>
+  <path d="M 50.0,153.8 L 60.4,159.1 L 70.8,142.2 L 81.1,126.3 L 91.5,149.6 L 101.9,174.9 L 112.2,196.5 L 122.6,193.7 L 133.0,207.1 L 143.4,204.0 L 153.8,206.3 L 164.1,222.2 L 174.5,223.6 L 184.9,201.1 L 195.2,174.2 L 205.6,193.4 L 216.0,172.8 L 226.4,177.1 L 236.8,166.6 L 247.1,144.2 L 257.5,153.9 L 267.9,150.7 L 278.2,151.6 L 288.6,155.3 L 299.0,139.8 L 309.4,131.2 L 319.8,114.8 L 330.1,124.4 L 340.5,114.4 L 350.9,96.9 L 361.2,97.2 L 371.6,91.4 L 382.0,91.7 L 392.4,94.7 L 402.8,98.8 L 413.1,85.1 L 423.5,67.1 L 433.9,45.7 L 444.2,60.6 L 454.6,79.3 L 465.0,87.6 L 475.4,84.0 L 485.8,85.7 L 496.1,105.7 L 506.5,85.9 L 516.9,82.4 L 527.2,96.4 L 537.6,98.1 L 548.0,110.9 L 558.4,115.5 L 568.8,104.8 L 579.1,92.3 L 589.5,85.0 L 599.9,96.9 L 610.2,78.3 L 620.6,70.6 L 631.0,73.9 L 641.4,76.2 L 651.8,75.7 L 662.1,59.2 L 672.5,61.8 L 682.9,67.4 L 693.2,64.4 L 703.6,60.9 L 714.0,75.2 L 724.4,87.5 L 734.8,78.0 L 745.1,76.0 L 755.5,75.3 L 765.9,69.4 L 776.2,64.7 L 786.6,89.2 L 797.0,88.7 L 807.4,95.8 L 817.8,134.3 L 828.1,116.2 L 838.5,117.0 L 848.9,115.0 L 859.2,122.2 L 869.6,125.9 L 880.0,143.1 L 880.0,245 L 50.0,245 Z" fill="url(#priceGrad)"/>
+  <polyline points="50.0,153.8 60.4,159.1 70.8,142.2 81.1,126.3 91.5,149.6 101.9,174.9 112.2,196.5 122.6,193.7 133.0,207.1 143.4,204.0 153.8,206.3 164.1,222.2 174.5,223.6 184.9,201.1 195.2,174.2 205.6,193.4 216.0,172.8 226.4,177.1 236.8,166.6 247.1,144.2 257.5,153.9 267.9,150.7 278.2,151.6 288.6,155.3 299.0,139.8 309.4,131.2 319.8,114.8 330.1,124.4 340.5,114.4 350.9,96.9 361.2,97.2 371.6,91.4 382.0,91.7 392.4,94.7 402.8,98.8 413.1,85.1 423.5,67.1 433.9,45.7 444.2,60.6 454.6,79.3 465.0,87.6 475.4,84.0 485.8,85.7 496.1,105.7 506.5,85.9 516.9,82.4 527.2,96.4 537.6,98.1 548.0,110.9 558.4,115.5 568.8,104.8 579.1,92.3 589.5,85.0 599.9,96.9 610.2,78.3 620.6,70.6 631.0,73.9 641.4,76.2 651.8,75.7 662.1,59.2 672.5,61.8 682.9,67.4 693.2,64.4 703.6,60.9 714.0,75.2 724.4,87.5 734.8,78.0 745.1,76.0 755.5,75.3 765.9,69.4 776.2,64.7 786.6,89.2 797.0,88.7 807.4,95.8 817.8,134.3 828.1,116.2 838.5,117.0 848.9,115.0 859.2,122.2 869.6,125.9 880.0,143.1" fill="none" stroke="#ef4444" stroke-width="1.5" stroke-linejoin="round"/>
+  <circle cx="880.0" cy="143.1" r="3" fill="#ef4444"/>
+  <text x="880.0" y="135.1" fill="#ef4444" font-size="11" text-anchor="middle" font-family="monospace" font-weight="bold">80.10</text>
+  <text x="50.0" y="265" fill="#666" font-size="9" text-anchor="middle" font-family="monospace">06-08</text><text x="153.8" y="265" fill="#666" font-size="9" text-anchor="middle" font-family="monospace">06-23</text><text x="257.5" y="265" fill="#666" font-size="9" text-anchor="middle" font-family="monospace">07-07</text><text x="361.2" y="265" fill="#666" font-size="9" text-anchor="middle" font-family="monospace">07-21</text><text x="465.0" y="265" fill="#666" font-size="9" text-anchor="middle" font-family="monospace">08-04</text><text x="568.8" y="265" fill="#666" font-size="9" text-anchor="middle" font-family="monospace">08-18</text><text x="672.5" y="265" fill="#666" font-size="9" text-anchor="middle" font-family="monospace">09-01</text><text x="776.2" y="265" fill="#666" font-size="9" text-anchor="middle" font-family="monospace">09-15</text><text x="880.0" y="265" fill="#666" font-size="9" text-anchor="middle" font-family="monospace">09-30</text>
+  <text x="50" y="278" fill="#555" font-size="9" font-family="monospace">数据源: 腾讯财经 | 2026-06-08 ~ 2026-09-30 (81个交易日)</text>
+</svg>
+  </div>
+
+  <div class="grid-2">
+    <div class="card">
+      <div class="card-title">机构一致预期EPS <span class="badge">同花顺 basic.10jqka</span></div>
+      <table><thead><tr><th style="text-align:center">年度</th><th style="text-align:center">预测机构数</th><th style="text-align:center">EPS均值</th></tr></thead><tbody><tr>
+      <td style="text-align:center;font-weight:600;color:#e2e8f0">2026</td>
+      <td style="text-align:center">31家</td>
+      <td style="text-align:center;font-family:monospace;color:#fbbf24">6.19</td></tr><tr>
+      <td style="text-align:center;font-weight:600;color:#e2e8f0">2027</td>
+      <td style="text-align:center">31家</td>
+      <td style="text-align:center;font-family:monospace;color:#fbbf24">6.62</td></tr><tr>
+      <td style="text-align:center;font-weight:600;color:#e2e8f0">2028</td>
+      <td style="text-align:center">31家</td>
+      <td style="text-align:center;font-family:monospace;color:#fbbf24">7.14</td></tr></tbody></table>
+      <div style="margin-top:12px;padding:10px;background:#1a1a2e;border-radius:4px;font-size:12px;color:#94a3b8;line-height:1.8">
+        
+        <div>📊 <span style="color:#e2e8f0">前向PE</span> = ¥80.10 / 6.19 = <span class="highlight">12.94x</span></div>
+        <div>📈 <span style="color:#e2e8f0">EPS CAGR</span> = (6.62/6.19-1) = <span class="up">6.90%</span></div>
+        <div>⚖️ <span style="color:#e2e8f0">PEG</span> = 12.94x / (6.90×100) = <span class="">1.86</span></div>
+        <div>⏱️ <span style="color:#e2e8f0">PE消化至30x</span> = 已低于30x，无需消化</div>
+      </div>
+    </div>
+    <div class="card">
+      <div class="card-title">资金面：融资余额日变化 <span class="badge">东方财富 datacenter</span></div>
+      <div style="color:#fbbf24;font-size:12px;margin-bottom:8px">⚠ 主力资金流API(push2his)被网络代理拦截，以下使用<span style="color:#e2e8f0">融资余额日变化</span>作为资金面替代指标</div>
+      <svg viewBox="0 0 900 220" style="width:100%;height:auto" xmlns="http://www.w3.org/2000/svg">
+  <line x1="55" y1="20.0" x2="880" y2="20.0" stroke="#1a1a2e" stroke-width="0.5"/><text x="50" y="24.0" fill="#666" font-size="10" text-anchor="end" font-family="monospace">+1.76</text><line x1="55" y1="61.2" x2="880" y2="61.2" stroke="#1a1a2e" stroke-width="0.5"/><text x="50" y="65.2" fill="#666" font-size="10" text-anchor="end" font-family="monospace">+1.03</text><line x1="55" y1="102.5" x2="880" y2="102.5" stroke="#1a1a2e" stroke-width="0.5"/><text x="50" y="106.5" fill="#666" font-size="10" text-anchor="end" font-family="monospace">+0.29</text><line x1="55" y1="143.8" x2="880" y2="143.8" stroke="#1a1a2e" stroke-width="0.5"/><text x="50" y="147.8" fill="#666" font-size="10" text-anchor="end" font-family="monospace">-0.45</text><line x1="55" y1="185.0" x2="880" y2="185.0" stroke="#1a1a2e" stroke-width="0.5"/><text x="50" y="189.0" fill="#666" font-size="10" text-anchor="end" font-family="monospace">-1.19</text><line x1="55" y1="118.5" x2="880" y2="118.5" stroke="#444" stroke-width="0.8"/><rect x="59.1" y="118.5" width="19.2" height="0.2" fill="#22c55e" opacity="0.85" rx="1"/><rect x="86.6" y="118.5" width="19.2" height="15.7" fill="#22c55e" opacity="0.85" rx="1"/><rect x="114.1" y="118.5" width="19.2" height="8.7" fill="#22c55e" opacity="0.85" rx="1"/><rect x="141.6" y="118.5" width="19.2" height="12.1" fill="#22c55e" opacity="0.85" rx="1"/><rect x="169.1" y="118.5" width="19.2" height="14.4" fill="#22c55e" opacity="0.85" rx="1"/><rect x="196.6" y="118.5" width="19.2" height="0.6" fill="#22c55e" opacity="0.85" rx="1"/><rect x="224.1" y="118.5" width="19.2" height="14.9" fill="#22c55e" opacity="0.85" rx="1"/><rect x="251.6" y="118.5" width="19.2" height="9.6" fill="#22c55e" opacity="0.85" rx="1"/><rect x="279.1" y="118.5" width="19.2" height="7.5" fill="#22c55e" opacity="0.85" rx="1"/><rect x="306.6" y="118.5" width="19.2" height="5.6" fill="#22c55e" opacity="0.85" rx="1"/><rect x="334.1" y="118.5" width="19.2" height="6.1" fill="#22c55e" opacity="0.85" rx="1"/><rect x="361.6" y="118.5" width="19.2" height="7.9" fill="#22c55e" opacity="0.85" rx="1"/><rect x="389.1" y="115.4" width="19.2" height="3.1" fill="#ef4444" opacity="0.85" rx="1"/><rect x="416.6" y="118.5" width="19.2" height="2.8" fill="#22c55e" opacity="0.85" rx="1"/><rect x="444.1" y="112.3" width="19.2" height="6.2" fill="#ef4444" opacity="0.85" rx="1"/><rect x="471.6" y="92.9" width="19.2" height="25.6" fill="#ef4444" opacity="0.85" rx="1"/><rect x="499.1" y="118.5" width="19.2" height="66.5" fill="#22c55e" opacity="0.85" rx="1"/><rect x="526.6" y="118.5" width="19.2" height="55.7" fill="#22c55e" opacity="0.85" rx="1"/><rect x="554.1" y="118.5" width="19.2" height="40.0" fill="#22c55e" opacity="0.85" rx="1"/><rect x="581.6" y="118.5" width="19.2" height="46.7" fill="#22c55e" opacity="0.85" rx="1"/><rect x="609.1" y="118.5" width="19.2" height="5.2" fill="#22c55e" opacity="0.85" rx="1"/><rect x="636.6" y="86.7" width="19.2" height="31.8" fill="#ef4444" opacity="0.85" rx="1"/><rect x="664.1" y="106.4" width="19.2" height="12.1" fill="#ef4444" opacity="0.85" rx="1"/><rect x="691.6" y="111.9" width="19.2" height="6.6" fill="#ef4444" opacity="0.85" rx="1"/><rect x="719.1" y="20.0" width="19.2" height="98.5" fill="#ef4444" opacity="0.85" rx="1"/><rect x="746.6" y="118.5" width="19.2" height="57.2" fill="#22c55e" opacity="0.85" rx="1"/><rect x="774.1" y="118.5" width="19.2" height="3.2" fill="#22c55e" opacity="0.85" rx="1"/><rect x="801.6" y="118.5" width="19.2" height="25.0" fill="#22c55e" opacity="0.85" rx="1"/><rect x="829.1" y="117.7" width="19.2" height="0.8" fill="#ef4444" opacity="0.85" rx="1"/><rect x="856.6" y="118.5" width="19.2" height="4.7" fill="#22c55e" opacity="0.85" rx="1"/><text x="68.8" y="205" fill="#666" font-size="9" text-anchor="middle" font-family="monospace">08-18</text><text x="151.2" y="205" fill="#666" font-size="9" text-anchor="middle" font-family="monospace">08-21</text><text x="233.8" y="205" fill="#666" font-size="9" text-anchor="middle" font-family="monospace">08-26</text><text x="316.2" y="205" fill="#666" font-size="9" text-anchor="middle" font-family="monospace">08-31</text><text x="398.8" y="205" fill="#666" font-size="9" text-anchor="middle" font-family="monospace">09-03</text><text x="481.2" y="205" fill="#666" font-size="9" text-anchor="middle" font-family="monospace">09-08</text><text x="563.8" y="205" fill="#666" font-size="9" text-anchor="middle" font-family="monospace">09-11</text><text x="646.2" y="205" fill="#666" font-size="9" text-anchor="middle" font-family="monospace">09-16</text><text x="728.8" y="205" fill="#666" font-size="9" text-anchor="middle" font-family="monospace">09-21</text><text x="811.2" y="205" fill="#666" font-size="9" text-anchor="middle" font-family="monospace">09-24</text>
+  <text x="55" y="218" fill="#555" font-size="9" font-family="monospace">数据源: 东方财富 datacenter | 融资余额日变化(净买入替代) | 近30个交易日</text>
+</svg>
+      <div style="margin-top:8px;display:grid;grid-template-columns:repeat(3,1fr);gap:8px;font-size:12px">
+        <div style="background:#1a1a2e;padding:8px;border-radius:4px;text-align:center"><div style="color:#64748b">近20日累计</div><div style="color:#22c55e;font-family:monospace;font-weight:700;font-size:16px">-2.45亿</div></div>
+        <div style="background:#1a1a2e;padding:8px;border-radius:4px;text-align:center"><div style="color:#64748b">净流入天数</div><div style="color:#ef4444;font-family:monospace;font-weight:700;font-size:16px">8日</div></div>
+        <div style="background:#1a1a2e;padding:8px;border-radius:4px;text-align:center"><div style="color:#64748b">净流出天数</div><div style="color:#22c55e;font-family:monospace;font-weight:700;font-size:16px">12日</div></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="grid-2">
+    <div class="card">
+      <div class="card-title">融资余额趋势 <span class="badge">东方财富 · 60日</span></div>
+      <svg viewBox="0 0 900 180" style="width:100%;height:auto" xmlns="http://www.w3.org/2000/svg">
+  <defs><linearGradient id="mgrad" x1="0" y1="0" x2="0" y2="1">
+    <stop offset="0%" stop-color="#6366f1" stop-opacity="0.2"/><stop offset="100%" stop-color="#6366f1" stop-opacity="0"/></linearGradient></defs>
+  <line x1="50" y1="15.0" x2="880" y2="15.0" stroke="#1a1a2e" stroke-width="0.5"/><text x="45" y="19.0" fill="#666" font-size="10" text-anchor="end" font-family="monospace">38.6</text><line x1="50" y1="60.0" x2="880" y2="60.0" stroke="#1a1a2e" stroke-width="0.5"/><text x="45" y="64.0" fill="#666" font-size="10" text-anchor="end" font-family="monospace">35.5</text><line x1="50" y1="105.0" x2="880" y2="105.0" stroke="#1a1a2e" stroke-width="0.5"/><text x="45" y="109.0" fill="#666" font-size="10" text-anchor="end" font-family="monospace">32.3</text><line x1="50" y1="150.0" x2="880" y2="150.0" stroke="#1a1a2e" stroke-width="0.5"/><text x="45" y="154.0" fill="#666" font-size="10" text-anchor="end" font-family="monospace">29.2</text>
+  <path d="M 50.0,41.5 L 71.3,42.3 L 92.6,48.9 L 113.8,43.6 L 135.1,50.7 L 156.4,54.9 L 177.7,51.6 L 199.0,48.9 L 220.3,48.2 L 241.5,53.8 L 262.8,53.9 L 284.1,57.9 L 305.4,60.2 L 326.7,63.3 L 347.9,67.0 L 369.2,67.2 L 390.5,71.1 L 411.8,73.5 L 433.1,75.5 L 454.4,76.9 L 475.6,78.5 L 496.9,80.5 L 518.2,79.8 L 539.5,80.5 L 560.8,78.9 L 582.1,72.3 L 603.3,89.5 L 624.6,103.9 L 645.9,114.3 L 667.2,126.4 L 688.5,127.8 L 709.7,119.5 L 731.0,116.4 L 752.3,114.7 L 773.6,89.2 L 794.9,104.0 L 816.2,104.8 L 837.4,111.3 L 858.7,111.1 L 880.0,112.3 L 880.0,150 L 50.0,150 Z" fill="url(#mgrad)"/>
+  <polyline points="50.0,41.5 71.3,42.3 92.6,48.9 113.8,43.6 135.1,50.7 156.4,54.9 177.7,51.6 199.0,48.9 220.3,48.2 241.5,53.8 262.8,53.9 284.1,57.9 305.4,60.2 326.7,63.3 347.9,67.0 369.2,67.2 390.5,71.1 411.8,73.5 433.1,75.5 454.4,76.9 475.6,78.5 496.9,80.5 518.2,79.8 539.5,80.5 560.8,78.9 582.1,72.3 603.3,89.5 624.6,103.9 645.9,114.3 667.2,126.4 688.5,127.8 709.7,119.5 731.0,116.4 752.3,114.7 773.6,89.2 794.9,104.0 816.2,104.8 837.4,111.3 858.7,111.1 880.0,112.3" fill="none" stroke="#6366f1" stroke-width="1.5" stroke-linejoin="round"/>
+  <circle cx="880.0" cy="112.3" r="3" fill="#6366f1"/>
+  <text x="880.0" y="104.3" fill="#818cf8" font-size="11" text-anchor="middle" font-family="monospace" font-weight="bold">31.84亿</text>
+  <text x="50.0" y="170" fill="#666" font-size="9" text-anchor="middle" font-family="monospace">08-04</text><text x="177.7" y="170" fill="#666" font-size="9" text-anchor="middle" font-family="monospace">08-12</text><text x="305.4" y="170" fill="#666" font-size="9" text-anchor="middle" font-family="monospace">08-20</text><text x="433.1" y="170" fill="#666" font-size="9" text-anchor="middle" font-family="monospace">08-28</text><text x="560.8" y="170" fill="#666" font-size="9" text-anchor="middle" font-family="monospace">09-07</text><text x="688.5" y="170" fill="#666" font-size="9" text-anchor="middle" font-family="monospace">09-15</text><text x="816.2" y="170" fill="#666" font-size="9" text-anchor="middle" font-family="monospace">09-23</text>
+  <text x="50" y="179" fill="#555" font-size="9" font-family="monospace">数据源: 东方财富 | 融资余额趋势 | 近40个交易日</text>
+</svg>
+      <div style="margin-top:8px;display:grid;grid-template-columns:repeat(3,1fr);gap:8px;font-size:12px">
+        <div style="background:#1a1a2e;padding:8px;border-radius:4px;text-align:center"><div style="color:#64748b">最新融资余额</div><div style="color:#818cf8;font-family:monospace;font-weight:700;font-size:16px">¥31.84亿</div></div>
+        <div style="background:#1a1a2e;padding:8px;border-radius:4px;text-align:center"><div style="color:#64748b">区间变化</div><div style="color:#22c55e;font-family:monospace;font-weight:700;font-size:16px">-10.93亿</div></div>
+        <div style="background:#1a1a2e;padding:8px;border-radius:4px;text-align:center"><div style="color:#64748b">最新融券余额</div><div style="color:#94a3b8;font-family:monospace;font-weight:700;font-size:16px">¥6.72亿</div></div>
+      </div>
+    </div>
+    <div class="card">
+      <div class="card-title">股东户数变化 / 筹码集中度 <span class="badge">东方财富 datacenter</span></div>
+      
+    <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-top:8px">
+      <div style="background:#0f172a;padding:12px;border-radius:6px;text-align:center"><div style="color:#64748b;font-size:11px">最新股东户数</div><div style="color:#e2e8f0;font-size:20px;font-family:monospace;font-weight:700;margin-top:4px">249,414</div></div>
+      <div style="background:#0f172a;padding:12px;border-radius:6px;text-align:center"><div style="color:#64748b;font-size:11px">环比变化</div><div style="color:#fbbf24;font-size:20px;font-family:monospace;font-weight:700;margin-top:4px">-0.89%</div></div>
+      <div style="background:#0f172a;padding:12px;border-radius:6px;text-align:center"><div style="color:#64748b;font-size:11px">变化户数</div><div style="color:#fbbf24;font-size:20px;font-family:monospace;font-weight:700;margin-top:4px">-2,230</div></div>
+      <div style="background:#0f172a;padding:12px;border-radius:6px;text-align:center"><div style="color:#64748b;font-size:11px">筹码判断</div><div style="color:#fbbf24;font-size:20px;font-weight:700;margin-top:4px">筹码稳定</div></div>
+    </div>
+      <div style="margin-top:12px;padding:10px;background:#1a1a2e;border-radius:4px;font-size:12px;color:#94a3b8;line-height:1.8">
+        <div>📋 股东户数环比 <span style="color:#fbbf24;font-weight:600">-0.89%</span> → 筹码稳定</div>
+        <div>💡 户数减少=筹码向大户集中=潜在利好；户数增加=筹码分散=潜在利空</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-title">最近研报 (东财 reportapi · 共8篇) <span class="badge">东方财富</span></div>
+    <table><thead><tr><th style="width:90px;text-align:center">日期</th><th style="width:100px">机构</th><th style="width:70px;text-align:center">评级</th><th>标题</th></tr></thead><tbody><tr>
+      <td style="text-align:center;color:#94a3b8;font-family:monospace;font-size:12px;white-space:nowrap">2026-09-10</td>
+      <td style="color:#cbd5e1;font-size:12px">国信证券</td>
+      <td style="text-align:center"><span style="color:#f97316;font-size:11px;padding:2px 8px;border:1px solid #f9731640;border-radius:3px">增持</span></td>
+      <td style="color:#e2e8f0;font-size:12px">2026年中报点评：收入利润双增，经营稳健，韧性凸显</td></tr><tr>
+      <td style="text-align:center;color:#94a3b8;font-family:monospace;font-size:12px;white-space:nowrap">2026-09-03</td>
+      <td style="color:#cbd5e1;font-size:12px">太平洋</td>
+      <td style="text-align:center"><span style="color:#ef4444;font-size:11px;padding:2px 8px;border:1px solid #ef444440;border-radius:3px">买入</span></td>
+      <td style="color:#e2e8f0;font-size:12px">美的集团：2026Q2收入业绩表现稳健，楼宇与机器人业务双位数增长</td></tr><tr>
+      <td style="text-align:center;color:#94a3b8;font-family:monospace;font-size:12px;white-space:nowrap">2026-08-30</td>
+      <td style="color:#cbd5e1;font-size:12px">开源证券</td>
+      <td style="text-align:center"><span style="color:#ef4444;font-size:11px;padding:2px 8px;border:1px solid #ef444440;border-radius:3px">买入</span></td>
+      <td style="color:#e2e8f0;font-size:12px">公司信息更新报告：2026Q2实际经营性利润仅小幅下滑，业绩韧性强</td></tr><tr>
+      <td style="text-align:center;color:#94a3b8;font-family:monospace;font-size:12px;white-space:nowrap">2026-08-30</td>
+      <td style="color:#cbd5e1;font-size:12px">国金证券</td>
+      <td style="text-align:center"><span style="color:#ef4444;font-size:11px;padding:2px 8px;border:1px solid #ef444440;border-radius:3px">买入</span></td>
+      <td style="color:#e2e8f0;font-size:12px">经营韧性突出，保持稳健增长</td></tr><tr>
+      <td style="text-align:center;color:#94a3b8;font-family:monospace;font-size:12px;white-space:nowrap">2026-07-31</td>
+      <td style="color:#cbd5e1;font-size:12px">开源证券</td>
+      <td style="text-align:center"><span style="color:#ef4444;font-size:11px;padding:2px 8px;border:1px solid #ef444440;border-radius:3px">买入</span></td>
+      <td style="color:#e2e8f0;font-size:12px">公司深度报告：美的空调欧洲出圈，拆解美的欧洲OBM业务进阶之路</td></tr><tr>
+      <td style="text-align:center;color:#94a3b8;font-family:monospace;font-size:12px;white-space:nowrap">2026-05-12</td>
+      <td style="color:#cbd5e1;font-size:12px">交银国际证券</td>
+      <td style="text-align:center"><span style="color:#ef4444;font-size:11px;padding:2px 8px;border:1px solid #ef444440;border-radius:3px">买入</span></td>
+      <td style="color:#e2e8f0;font-size:12px">稳步推进ToB业务与全球化，迈向技术驱动的全球工业科技集团</td></tr><tr>
+      <td style="text-align:center;color:#94a3b8;font-family:monospace;font-size:12px;white-space:nowrap">2026-05-07</td>
+      <td style="color:#cbd5e1;font-size:12px">开源证券</td>
+      <td style="text-align:center"><span style="color:#ef4444;font-size:11px;padding:2px 8px;border:1px solid #ef444440;border-radius:3px">买入</span></td>
+      <td style="color:#e2e8f0;font-size:12px">公司信息更新报告：高基数下增长凸显龙头韧性，全额注销回购提高股息</td></tr><tr>
+      <td style="text-align:center;color:#94a3b8;font-family:monospace;font-size:12px;white-space:nowrap">2026-05-06</td>
+      <td style="color:#cbd5e1;font-size:12px">交银国际证券</td>
+      <td style="text-align:center"><span style="color:#ef4444;font-size:11px;padding:2px 8px;border:1px solid #ef444440;border-radius:3px">买入</span></td>
+      <td style="color:#e2e8f0;font-size:12px">1Q26业绩符合预期，全年稳健增长可期；维持买入</td></tr></tbody></table>
+  </div>
+
+  <div class="card">
+    <div class="card-title">分红送转历史 <span class="badge">东方财富 · 15条 · TTM股息率5.37%</span></div>
+    <table><thead><tr><th style="width:110px;text-align:center">除权除息日</th><th style="text-align:center">分配方案</th><th style="width:120px;text-align:center">每股派息(税前)</th><th style="width:80px;text-align:center">进度</th></tr></thead><tbody><tr>
+      <td style="text-align:center;color:#94a3b8;font-family:monospace;font-size:12px">2026-06-29</td>
+      <td style="text-align:center;color:#fbbf24;font-family:monospace">每10股派38.0元</td>
+      <td style="text-align:center;color:#e2e8f0;font-family:monospace">¥3.8000</td>
+      <td style="text-align:center;color:#94a3b8;font-size:12px">实施分配</td></tr><tr>
+      <td style="text-align:center;color:#94a3b8;font-family:monospace;font-size:12px">2025-11-18</td>
+      <td style="text-align:center;color:#fbbf24;font-family:monospace">每10股派5.0元</td>
+      <td style="text-align:center;color:#e2e8f0;font-family:monospace">¥0.5000</td>
+      <td style="text-align:center;color:#94a3b8;font-size:12px">实施分配</td></tr><tr>
+      <td style="text-align:center;color:#94a3b8;font-family:monospace;font-size:12px">2025-06-12</td>
+      <td style="text-align:center;color:#fbbf24;font-family:monospace">每10股派35.0元</td>
+      <td style="text-align:center;color:#e2e8f0;font-family:monospace">¥3.5000</td>
+      <td style="text-align:center;color:#94a3b8;font-size:12px">实施分配</td></tr><tr>
+      <td style="text-align:center;color:#94a3b8;font-family:monospace;font-size:12px">2024-05-15</td>
+      <td style="text-align:center;color:#fbbf24;font-family:monospace">每10股派30.0元</td>
+      <td style="text-align:center;color:#e2e8f0;font-family:monospace">¥3.0000</td>
+      <td style="text-align:center;color:#94a3b8;font-size:12px">实施分配</td></tr><tr>
+      <td style="text-align:center;color:#94a3b8;font-family:monospace;font-size:12px">2023-06-01</td>
+      <td style="text-align:center;color:#fbbf24;font-family:monospace">每10股派25.0元</td>
+      <td style="text-align:center;color:#e2e8f0;font-family:monospace">¥2.5000</td>
+      <td style="text-align:center;color:#94a3b8;font-size:12px">实施分配</td></tr><tr>
+      <td style="text-align:center;color:#94a3b8;font-family:monospace;font-size:12px">2022-06-02</td>
+      <td style="text-align:center;color:#fbbf24;font-family:monospace">每10股派17.0元</td>
+      <td style="text-align:center;color:#e2e8f0;font-family:monospace">¥1.7009</td>
+      <td style="text-align:center;color:#94a3b8;font-size:12px">实施分配</td></tr><tr>
+      <td style="text-align:center;color:#94a3b8;font-family:monospace;font-size:12px">2021-06-02</td>
+      <td style="text-align:center;color:#fbbf24;font-family:monospace">每10股派16.0元</td>
+      <td style="text-align:center;color:#e2e8f0;font-family:monospace">¥1.6006</td>
+      <td style="text-align:center;color:#94a3b8;font-size:12px">实施分配</td></tr><tr>
+      <td style="text-align:center;color:#94a3b8;font-family:monospace;font-size:12px">2020-06-02</td>
+      <td style="text-align:center;color:#fbbf24;font-family:monospace">每10股派16.0元</td>
+      <td style="text-align:center;color:#e2e8f0;font-family:monospace">¥1.6000</td>
+      <td style="text-align:center;color:#94a3b8;font-size:12px">实施分配</td></tr><tr>
+      <td style="text-align:center;color:#94a3b8;font-family:monospace;font-size:12px">2019-05-30</td>
+      <td style="text-align:center;color:#fbbf24;font-family:monospace">每10股派13.0元</td>
+      <td style="text-align:center;color:#e2e8f0;font-family:monospace">¥1.3040</td>
+      <td style="text-align:center;color:#94a3b8;font-size:12px">实施分配</td></tr><tr>
+      <td style="text-align:center;color:#94a3b8;font-family:monospace;font-size:12px">2018-05-04</td>
+      <td style="text-align:center;color:#fbbf24;font-family:monospace">每10股派12.0元</td>
+      <td style="text-align:center;color:#e2e8f0;font-family:monospace">¥1.2000</td>
+      <td style="text-align:center;color:#94a3b8;font-size:12px">实施分配</td></tr></tbody></table>
+  </div>
+
+  <div class="judgment-box">
+    <div class="card-title" style="border-bottom:2px solid #1e293b">⚖️ 综合判断 <span class="badge" style="background:#7c2d12;color:#fbbf24">非投资建议</span></div>
+    <div class="judge-item"><div class="judge-label"><span class="judge-dot" style="background:#22c55e"></span>贵不贵</div><div class="judge-content"><div class="judge-verdict" style="color:#22c55e">显著低估</div><div class="judge-detail">PE(TTM)=13.77x，远低于A股均值；前向PE=12.94x，PB=2.89x接近净资产。 TTM股息率5.37%，高股息特征显著。</div></div></div>
+    <div class="judge-item"><div class="judge-label"><span class="judge-dot" style="background:#22c55e"></span>筹码稳不稳</div><div class="judge-content"><div class="judge-verdict" style="color:#22c55e">筹码分散，杠杆资金净流出</div><div class="judge-detail">近20日融资净流出¥2.45亿，融资余额趋势下行。 股东户数环比-0.89%，筹码分散。</div></div></div>
+    <div class="judge-item"><div class="judge-label"><span class="judge-dot" style="background:#22c55e"></span>能不能拿</div><div class="judge-content"><div class="judge-verdict" style="color:#22c55e">可持有/逢低布局</div><div class="judge-detail">低估值+高股息+周期底部特征，适合价值型投资者中长期持有。</div></div></div>
+  </div>
+
+  <div class="disclaimer">⚠️ 本报告由AI自动生成，数据来自公开API接口，仅供研究参考，<b style="color:#94a3b8">不构成任何投资建议</b>。投资有风险，入市需谨慎。</div>
+  <div class="footer">数据来源：<span style="color:#6366f1">腾讯财经</span>(实时行情/K线) · <span style="color:#6366f1">东方财富</span>(融资融券/股东户数/研报/分红) · <span style="color:#6366f1">同花顺</span>(机构一致预期EPS)<br>
+    数据抓取时间：2026-09-30 21:11:43 | 报告生成时间：2026-09-30 21:12:13<br>
+    Powered by <a href="https://github.com/isnotry/stockval" target="_blank" rel="noopener noreferrer" style="color:#818cf8;text-decoration:underline;text-decoration-color:#334155;text-underline-offset:2px">stockval</a> · <a href="https://github.com/isnotry/stockval" target="_blank" rel="noopener noreferrer" style="color:#818cf8;text-decoration:underline;text-decoration-color:#334155;text-underline-offset:2px">GitHub 开源仓库</a></div>
+</div>
+
+<div class="share-overlay" id="shareOverlay" onclick="if(event.target===this)closeShare()">
+  <div class="share-modal">
+    <h3>📤 分享卡片（手机适配 · 可保存/复制）</h3>
+    <div class="tip">图片为本地浏览器实时生成，完全离线，不含任何外部请求</div>
+    <canvas id="shareCanvas"></canvas>
+    <div class="share-actions">
+      <button class="btn-save" onclick="saveShare()">💾 保存图片</button>
+      <button class="btn-copy" onclick="copyShare()">📋 复制图片</button>
+      <button class="btn-close" onclick="closeShare()">✕ 关闭</button>
+    </div>
+  </div>
+</div>
+
+<script>
+const SHARE_DATA = {"name": "美的集团", "code": "000333", "prefix": "SZ", "sector": "家电", "data_date": "2026-09-30", "price": "¥80.10", "price_color": "#22c55e", "change_amt": "-1.56", "change_pct": "-1.91%", "pe_ttm": "13.77", "pb": "2.89", "mcap": "¥5516亿", "dy": "5.37", "fwd_pe": "12.94", "peg": "1.86", "val_judge": "显著低估", "val_color": "#22c55e", "chip_judge": "筹码分散·杠杆资金净流出", "chip_color": "#22c55e", "hold_judge": "可持有/逢低布局", "hold_color": "#22c55e", "holder_change": -0.886172529446, "data_source": "腾讯财经 / 东方财富 / 同花顺"};
+const C = {bg:'#0a0e1a',surface:'#0f172a',surface2:'#1a1a2e',border:'#1e293b',text:'#e2e8f0',dim:'#94a3b8',dim2:'#64748b',accent:'#6366f1',up:'#ef4444',down:'#22c55e',hi:'#fbbf24'};
+const FONT = "'PingFang SC','Microsoft YaHei','Hiragino Sans GB',sans-serif";
+
+function rr(ctx,x,y,w,h,r){
+  ctx.beginPath();
+  ctx.moveTo(x+r,y);
+  ctx.arcTo(x+w,y,x+w,y+h,r);
+  ctx.arcTo(x+w,y+h,x,y+h,r);
+  ctx.arcTo(x,y+h,x,y,r);
+  ctx.arcTo(x,y,x+w,y,r);
+  ctx.closePath();
+}
+function txt(ctx,s,x,y,font,color,align){
+  ctx.font=font; ctx.fillStyle=color; ctx.textAlign=align||'left'; ctx.textBaseline='alphabetic';
+  ctx.fillText(s,x,y);
+}
+
+function calcH(d){
+  const M=24; let h=M;
+  h+=92+16;            // header
+  h+=80+16;            // price
+  h+=2*64+12+16;       // metrics 2x2
+  h+=52+16;            // 前向PE / PEG
+  if(d.holder_change!==null && d.holder_change!==undefined) h+=52+16; // 股东户数筹码
+  h+=(3*64+24)+16;     // 综合判断 3 行
+  h+=70;               // footer
+  h+=M;
+  return h;
+}
+
+function drawShare(){
+  const d = SHARE_DATA;
+  const cv = document.getElementById('shareCanvas');
+  if(!cv) return;
+  const S = 2;          // 2x 视网膜清晰度
+  const W = 640;
+  const M = 24;
+  const H = calcH(d);
+  cv.width = W*S; cv.height = H*S;
+  const ctx = cv.getContext('2d');
+  ctx.scale(S,S);
+  ctx.fillStyle = C.bg; ctx.fillRect(0,0,W,H);
+
+  let y = M;
+
+  // ── 头部 band ──
+  const g = ctx.createLinearGradient(0,0,W,0);
+  g.addColorStop(0,'#0f172a'); g.addColorStop(1,'#1e1b4b');
+  rr(ctx,M,y,W-2*M,92,12); ctx.fillStyle=g; ctx.fill();
+  ctx.fillStyle=C.accent; rr(ctx,M,y,5,92,2); ctx.fill();
+  txt(ctx,d.name,M+22,y+40,"700 30px "+FONT,C.text);
+  txt(ctx,d.prefix+'.'+d.code+' · '+d.sector+' · '+d.data_date,M+22,y+61,"400 13px "+FONT,C.dim);
+  txt(ctx,'全维估值体检',M+22,y+80,"400 12px "+FONT,C.accent);
+  y += 92+16;
+
+  // ── 现价 ──
+  txt(ctx,d.price,M,y+44,"700 46px "+FONT,d.price_color);
+  txt(ctx,d.change_amt+' ('+d.change_pct+')',M,y+70,"400 16px "+FONT,d.price_color);
+  txt(ctx,'现价 · 腾讯财经',W-M,y+44,"400 12px "+FONT,C.dim,'right');
+  y += 80+16;
+
+  // ── 指标 2x2 ──
+  const cellW=(W-2*M-12)/2, cellH=64;
+  const metrics=[['PE(TTM)',d.pe_ttm+'x',C.hi],['PB',d.pb+'x',C.text],['总市值',d.mcap,C.text],['股息率(TTM)',d.dy+'%',C.hi]];
+  metrics.forEach((m,i)=>{
+    const cx=M+(i%2)*(cellW+12), cy=y+Math.floor(i/2)*(cellH+12);
+    rr(ctx,cx,cy,cellW,cellH,8); ctx.fillStyle=C.surface; ctx.fill();
+    ctx.strokeStyle=C.border; ctx.lineWidth=1; rr(ctx,cx,cy,cellW,cellH,8); ctx.stroke();
+    txt(ctx,m[0],cx+14,cy+24,"400 12px "+FONT,C.dim);
+    txt(ctx,m[1],cx+14,cy+52,"700 22px "+FONT,m[2]);
+  });
+  y += 2*cellH+12+16;
+
+  // ── 前向PE / PEG ──
+  rr(ctx,M,y,W-2*M,52,8); ctx.fillStyle=C.surface; ctx.fill();
+  ctx.strokeStyle=C.border; rr(ctx,M,y,W-2*M,52,8); ctx.stroke();
+  txt(ctx,'前向PE',M+16,y+22,"400 12px "+FONT,C.dim);
+  txt(ctx,d.fwd_pe+'x',M+16,y+42,"700 18px "+FONT,C.text);
+  txt(ctx,'PEG',M+W/2,y+22,"400 12px "+FONT,C.dim);
+  txt(ctx,d.peg,M+W/2,y+42,"700 18px "+FONT,C.text);
+  y += 52+16;
+
+  // ── 股东户数 / 筹码（可选）──
+  if(d.holder_change!==null && d.holder_change!==undefined){
+    let t,cc;
+    if(d.holder_change<-5){t='筹码集中';cc=C.up;}
+    else if(d.holder_change>5){t='筹码分散';cc=C.down;}
+    else{t='筹码稳定';cc=C.hi;}
+    const ch=d.holder_change>0?('+'+d.holder_change):(''+d.holder_change);
+    rr(ctx,M,y,W-2*M,52,8); ctx.fillStyle=C.surface; ctx.fill();
+    ctx.strokeStyle=C.border; rr(ctx,M,y,W-2*M,52,8); ctx.stroke();
+    txt(ctx,'股东户数环比',M+16,y+22,"400 12px "+FONT,C.dim);
+    txt(ctx,ch+'% · '+t,M+16,y+42,"700 18px "+FONT,cc);
+    y += 52+16;
+  }
+
+  // ── 综合判断 3 行 ──
+  const verdicts=[['贵不贵',d.val_judge,d.val_color],['筹码稳不稳',d.chip_judge,d.chip_color],['能不能拿',d.hold_judge,d.hold_color]];
+  rr(ctx,M,y,W-2*M,3*64+24,10); ctx.fillStyle=C.surface2; ctx.fill();
+  let vy=y+24;
+  verdicts.forEach(v=>{
+    ctx.fillStyle=v[2]; ctx.beginPath(); ctx.arc(M+24,vy+6,6,0,Math.PI*2); ctx.fill();
+    txt(ctx,v[0],M+40,vy+12,"700 15px "+FONT,C.text);
+    txt(ctx,v[1],M+40,vy+38,"700 18px "+FONT,v[2]);
+    vy += 64;
+  });
+  y += 3*64+24+16;
+
+  // ── 页脚 ──
+  txt(ctx,'数据来源：'+d.data_source,W/2,y+18,"400 11px "+FONT,C.dim2,'center');
+  txt(ctx,'AI自动生成 · 仅供研究参考 · 不构成投资建议',W/2,y+38,"400 11px "+FONT,C.dim2,'center');
+  txt(ctx,'Powered by stockval',W/2,y+56,"400 11px "+FONT,C.dim2,'center');
+}
+
+function openShare(){
+  document.getElementById('shareOverlay').classList.add('show');
+  // canvas 默认 width=300，不能用 !cv.width 判断；每次打开都重绘（幂等且廉价）
+  try { drawShare(); } catch(e) { console.error('drawShare failed:', e); alert('卡片生成失败，请刷新页面重试'); }
+}
+function closeShare(){ document.getElementById('shareOverlay').classList.remove('show'); }
+function saveShare(){
+  const cv=document.getElementById('shareCanvas');
+  const a=document.createElement('a');
+  a.download=SHARE_DATA.name+'_'+SHARE_DATA.code+'_估值体检.png';
+  a.href=cv.toDataURL('image/png');
+  a.click();
+}
+function copyShare(){
+  const cv=document.getElementById('shareCanvas');
+  if(!cv.toBlob){ alert('当前浏览器不支持复制图片，请使用保存图片'); return; }
+  cv.toBlob(function(blob){
+    try{
+      if(navigator.clipboard && navigator.clipboard.write){
+        navigator.clipboard.write([new ClipboardItem({'image/png':blob})]).then(
+          function(){ alert('已复制到剪贴板，可直接粘贴分享'); },
+          function(){ alert('复制失败，请用保存图片'); }
+        );
+      } else { alert('当前环境不支持复制，请使用保存图片'); }
+    }catch(e){ alert('复制失败，请用保存图片'); }
+  });
+}
+</script>
+</body>
+</html>
