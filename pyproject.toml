@@ -23,8 +23,8 @@ classifiers = [
 dependencies = ["requests"]
 
 [project.urls]
-Repository = "https://github.com/isnotry/stockval"
-Issues = "https://github.com/isnotry/stockval/issues"
+Repository = "https://github.com/isnotry/StockVal"
+Issues = "https://github.com/isnotry/StockVal/issues"
 
 [project.scripts]
 stockval = "stockval.cli:main"

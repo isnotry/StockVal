@@ -10,9 +10,9 @@
 
 > 选入股票，一键抓取七个维度的真实数据，生成能离线打开、能直接发微信的估值体检报告。
 
-![界面截图](https://cdn.jsdelivr.net/gh/isnotry/stockval@main/docs/screenshot.png)
+![界面截图](https://cdn.jsdelivr.net/gh/isnotry/StockVal@main/docs/screenshot.png)
 
-**[在线预览](https://isnotry.github.io/stockval/)**
+**[在线预览](https://isnotry.github.io/StockVal/)**
 
 ---
 
@@ -38,13 +38,13 @@
 
 ### 在线预览
 
-点击 **[在线预览](https://isnotry.github.io/stockval/)** 可以直接看到成品长什么样，无需安装。
+点击 **[在线预览](https://isnotry.github.io/StockVal/)** 可以直接看到成品长什么样，无需安装。
 
 ### 本地使用
 
 ```bash
 pip install requests
-git clone https://github.com/isnotry/stockval.git
+git clone https://github.com/isnotry/StockVal.git
 cd stockval
 
 python -m stockval add 600519      # 添加一只（抓取 + 渲染 + 重建导航）
@@ -73,7 +73,7 @@ python -m stockval open            # 打开导航页
 
 报告是暗色单页，从上到下依次是：实时行情卡 → 价格走势 → 机构一致预期 → 主力资金 → 融资余额趋势 → 股东户数 → 最近研报 → 分红送转 → 综合判断。
 
-![单只股票报告](https://cdn.jsdelivr.net/gh/isnotry/stockval@main/docs/screenshot-report.png)
+![单只股票报告](https://cdn.jsdelivr.net/gh/isnotry/StockVal@main/docs/screenshot-report.png)
 
 | 位置 | 元素 | 作用 |
 |---|---|---|
@@ -93,7 +93,7 @@ python -m stockval open            # 打开导航页
 
 报告右上角的分享卡片由浏览器本地现画，不发任何外部请求：
 
-![手机分享卡片](https://cdn.jsdelivr.net/gh/isnotry/stockval@main/docs/screenshot-share.png)
+![手机分享卡片](https://cdn.jsdelivr.net/gh/isnotry/StockVal@main/docs/screenshot-share.png)
 
 ## 七个数据维度
 
