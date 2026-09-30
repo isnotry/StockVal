@@ -12,7 +12,7 @@
 
 ![界面截图](https://cdn.jsdelivr.net/gh/isnotry/StockVal@main/docs/screenshot.png)
 
-**[在线预览](https://isnotry.github.io/StockVal/)**
+**[在线预览](https://isnotry.github.io/stockval/)**
 
 ---
 
@@ -38,7 +38,7 @@
 
 ### 在线预览
 
-点击 **[在线预览](https://isnotry.github.io/StockVal/)** 可以直接看到成品长什么样，无需安装。
+点击 **[在线预览](https://isnotry.github.io/stockval/)** 可以直接看到成品长什么样，无需安装。
 
 ### 本地使用
 
