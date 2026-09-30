@@ -10,9 +10,9 @@
 
 > Give it a ticker, get seven dimensions of real data and a valuation report you can open offline or forward on WeChat.
 
-![Dashboard screenshot](https://cdn.jsdelivr.net/gh/isnotry/stockval@main/docs/screenshot.png)
+![Dashboard screenshot](https://cdn.jsdelivr.net/gh/isnotry/StockVal@main/docs/screenshot.png)
 
-**[Live preview](https://isnotry.github.io/stockval/)**
+**[Live preview](https://isnotry.github.io/StockVal/)**
 
 ---
 
@@ -38,13 +38,13 @@ Hand it a stock code. It collects what is scattered across three data sources, t
 
 ### Online preview
 
-Open the **[live preview](https://isnotry.github.io/stockval/)** to see the finished report without installing anything.
+Open the **[live preview](https://isnotry.github.io/StockVal/)** to see the finished report without installing anything.
 
 ### Run it locally
 
 ```bash
 pip install requests
-git clone https://github.com/isnotry/stockval.git
+git clone https://github.com/isnotry/StockVal.git
 cd stockval
 
 python -m stockval add 600519      # add one stock (fetch + render + rebuild dashboard)
@@ -73,7 +73,7 @@ Install it as a command with `pip install -e .` and call `stockval` directly; `.
 
 The report is a dark single page: quote card, price chart, analyst consensus, main-capital flow, margin balance trend, shareholder count, recent reports, dividends, and the verdict box.
 
-![Single stock report](https://cdn.jsdelivr.net/gh/isnotry/stockval@main/docs/screenshot-report.png)
+![Single stock report](https://cdn.jsdelivr.net/gh/isnotry/StockVal@main/docs/screenshot-report.png)
 
 | Where | Element | What it does |
 |---|---|---|
@@ -93,7 +93,7 @@ Keys for the menus and pickers (`list`, `menu`, `remove` all share them):
 
 The share card in the top right corner of a report is drawn locally in the browser and makes no external requests:
 
-![Phone share card](https://cdn.jsdelivr.net/gh/isnotry/stockval@main/docs/screenshot-share.png)
+![Phone share card](https://cdn.jsdelivr.net/gh/isnotry/StockVal@main/docs/screenshot-share.png)
 
 ## The seven dimensions
 
