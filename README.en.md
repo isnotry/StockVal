@@ -12,7 +12,7 @@
 
 ![Dashboard screenshot](https://cdn.jsdelivr.net/gh/isnotry/StockVal@main/docs/screenshot.png)
 
-**[Live preview](https://isnotry.github.io/stockval/)**
+**[Live preview](https://kingsir.work/StockVal/)**
 
 ---
 
@@ -38,7 +38,7 @@ Hand it a stock code. It collects what is scattered across three data sources, t
 
 ### Online preview
 
-Open the **[live preview](https://isnotry.github.io/stockval/)** to see the finished report without installing anything.
+Open the **[live preview](https://kingsir.work/StockVal/)** to see the finished report without installing anything.
 
 ### Run it locally
 
