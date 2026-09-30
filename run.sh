@@ -1,5 +1,5 @@
 #!/bin/sh
-# stockval 便捷运行脚本 —— 免去手敲 python -m stockval
+# StockVal 便捷运行脚本 —— 免去手敲 python -m stockval
 # 用法：./run.sh <子命令> [参数...]
 #   例：./run.sh list
 #        ./run.sh add 600519

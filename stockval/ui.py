@@ -188,7 +188,7 @@ def run_main_menu():
     """顶层主菜单：列出全部指令与功能介绍，↑/↓/j/k 移动，Enter 进入，q 退出。"""
     if not sys.stdin.isatty():
         # 非交互：打印清单，兼容脚本 / CI / 管道
-        print("stockval 指令一览：")
+        print("StockVal 指令一览：")
         for key, title, desc in COMMANDS:
             print(f"  {key:<8} {title} — {desc}")
         print("\n直接运行 `stockval <指令> [参数]` 可执行对应命令；")
@@ -203,7 +203,7 @@ def run_main_menu():
         cols = shutil.get_terminal_size((80, 24)).columns
         bar = "─" * min(cols, 64)
         lines = [
-            " A股估值体检 · 主菜单",
+            " StockVal · A股估值体检",
             " ↑/↓ 或 j/k 移动 · Enter 进入指令 · q 退出",
             bar,
         ]

@@ -1,4 +1,4 @@
-"""stockval — A股全维估值体检 CLI 工具。"""
+"""StockVal — A股全维估值体检 CLI 工具。"""
 
 __version__ = "0.1.0"
 

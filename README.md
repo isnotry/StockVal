@@ -1,4 +1,4 @@
-# stockval · A股全维估值体检 CLI
+# StockVal · A股全维估值体检 CLI
 
 **简体中文** | [English](README.en.md)
 

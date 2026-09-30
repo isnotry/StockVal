@@ -1,4 +1,4 @@
-# A股全维估值体检 CLI · stockval
+# StockVal · A-Share Valuation Checkup CLI
 
 [简体中文](README.md) | **English**
 
