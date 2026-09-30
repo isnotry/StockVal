@@ -1,0 +1,30 @@
+# macOS
+.DS_Store
+._*
+
+# 编辑器
+.idea/
+.vscode/
+
+# Python
+__pycache__/
+*.pyc
+*.pyo
+.venv/
+venv/
+*.egg-info/
+build/
+dist/
+.pytest_cache/
+
+# 本地工作痕迹（agent 记忆、发布元数据、临时脚本）
+.workbuddy/
+.wbapp_*.genie
+temp/
+*.log
+
+# 运行产物：抓取的数据与生成的报告（含个人自选股快照）
+output/
+
+# 个人自选股注册表（对外只提供 registry.example.json）
+registry.json

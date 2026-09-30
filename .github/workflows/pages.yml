@@ -1,0 +1,44 @@
+name: Deploy to GitHub Pages
+
+# demo/ 是一份零构建的静态示例报告（由 stockval 生成后复制进来），
+# 直接整目录上传即可，不需要任何构建步骤。
+#
+# ⚠️ 首次部署前需要在仓库 Settings → Pages → Build and deployment →
+#    Source 选「GitHub Actions」（下拉框里的第二项，不是 Deploy from a branch）。
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'demo/**'
+      - '.github/workflows/pages.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: pages
+  cancel-in-progress: true
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+      - uses: actions/configure-pages@v6
+      - uses: actions/upload-pages-artifact@v5
+        with:
+          path: demo
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    permissions:
+      pages: write
+      id-token: write
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - id: deployment
+        uses: actions/deploy-pages@v5
