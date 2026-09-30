@@ -1,4 +1,4 @@
-"""stockval CLI 入口。
+"""StockVal CLI 入口。
 
 子命令（单行，仍可直接使用，兼容现有脚本 / run.sh）：
   init                迁移已有报告 / 初始化空项目
